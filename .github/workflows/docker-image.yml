@@ -8,11 +8,19 @@ on:
 
 jobs:
 
-  build:
-
+  job1_build_image1
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag flask_image:$(date +%s)
+      run: docker build . --file Dockerfile --tag job1:$(date +%s)
+      
+    job2_build_image2  
+      runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag job2:$(date +%s)
+
