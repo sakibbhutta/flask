@@ -9,7 +9,7 @@ on:
 jobs:
 
   job1_build_image1
-    runs-on: ubuntu-latest
+     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
