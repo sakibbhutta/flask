@@ -167,3 +167,9 @@ jobs:
 ```
 20. The above changes make the application RUN on AWS and any changes/commits in github repository are
 synchronized and are made on running running flask application on AWS.
+21. For `AWS EB`, appliaction needs to be configured with 
+```console
+        Name of application: flask
+        Environment name: Flask-env-1
+        version: 3.5.0
+```
