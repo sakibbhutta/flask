@@ -136,3 +136,34 @@ click on `New repository secret` and add  `Access key ID` and `secret key access
 17.  Finally, click on `Start commit` option to commit the changes to `AWS-ECR`
 18. Job ran successfully:
 ![image](https://user-images.githubusercontent.com/126319802/229429619-d3b48e5d-6a4c-449f-9094-a9eaf176b6c1.png)
+19. To build the image and deploy the running application on `AWS Elastic Beanstalk` make following changes in `workflow file`
+```console
+name: Deploy master
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: flask
+        environment_name: Flask-env-1
+        version_label: 3.5.0
+        region: us-east-1
+        deployment_package: deploy.zip
+```
+20. The above changes make the application RUN on AWS and any changes/commits in github repository are
+synchronized and are made on running running flask application on AWS.
