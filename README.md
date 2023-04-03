@@ -131,6 +131,8 @@ jobs:
 AmazonEC2ContainerRegistryFullAccess
 ```
 15. During user creation process, generate `Access key ID` and `secret key access` 
-19. Now, To set the secret variables go to `settings` of `flask` repositry, go to `Secrets and Variables` and then `Action`. 
+16. Now, To set the secret variables go to `settings` of `flask` repositry, go to `Secrets and Variables` and then `Action`. 
 click on `New repository secret` and add  `Access key ID` and `secret key access` to AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY respectively: 
-15.  Finally, click on `Start commit` option to commit the changes to `AWS-ECR`
+17.  Finally, click on `Start commit` option to commit the changes to `AWS-ECR`
+18. Job ran successfully:
+![image](https://user-images.githubusercontent.com/126319802/229429619-d3b48e5d-6a4c-449f-9094-a9eaf176b6c1.png)
