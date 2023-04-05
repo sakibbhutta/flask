@@ -15,7 +15,7 @@ jobs:
         steps:
            -  uses: actions/checkout@v3
            -  name: Build the Docker image
-              run: docker build . --file Dockerfile --tag job1:$(date +%s)
+              run: docker build --file Dockerfile --tag job1:$(date +%s)
 
     build2:
         runs-on: ubuntu-latest
@@ -24,4 +24,4 @@ jobs:
         steps:
            -  uses: actions/checkout@v3
            -  name: Build the Docker image
-              run: docker build . --file Dockerfile --tag job2:$(date +%s)
+              run: docker build --file Dockerfile --tag job2:$(date +%s)
