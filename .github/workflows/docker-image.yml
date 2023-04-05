@@ -1,26 +1,27 @@
-name: Deploy master
+name: Docker Image CI
+
 on:
-  push:
-    branches:
-    - main
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
 
 jobs:
-  build:
-    runs-on: [self-hosted, Linux, X64]
-    steps:
-    - name: Checkout source code
-      uses: actions/checkout@v2
 
-    - name: Generate deployment package
-      run: zip -r deploy.zip . -x '*.git*'
+    build1:
 
-    - name: Deploy to EB
-      uses: einaregilsson/beanstalk-deploy@v21
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: flask
-        environment_name: Flask-env-1
-        version_label: 3.5.0
-        region: us-east-1
-        deployment_package: deploy.zip
+        runs-on: [self-hosted, Linux, X64]
+
+        steps:
+           -  uses: actions/checkout@v3
+           -  name: Build the Docker image
+              run: docker build . --file Dockerfile --tag job1:$(date +%s)
+
+    build2:
+        runs-on: ubuntu-latest
+        needs: build1
+
+        steps:
+           -  uses: actions/checkout@v3
+           -  name: Build the Docker image
+              run: docker build . --file Dockerfile --tag job2:$(date +%s)
